@@ -1,0 +1,60 @@
+该目录用来存放外置命令的.cpp，需要先通过 g++ cmd.cpp -o cmd 生成他们的可执行文件，cmd为cp/mv/rm/ps/tree，这样myshell中的main.cpp、Redirection函数才能构建正确路径对相应.exe调用。
+所有外置命令都采用统一函数框架编写（具体也可以参考已有的mv.cpp和tree.cpp）：
+#include <iostream>
+#include <cstring>
+#include <cerrno>
+#include <sys/stat.h>
+#include <string>
+#include <unistd.h>
+#include <cstdio>
+
+
+struct Command {
+    bool is_back = false;
+    int com_id = -1;
+    std::string option;
+    std::string para_a;
+    std::string para_b;
+    bool is_in_relocate = false;
+    bool is_out_relocate = false;
+    bool cover_or_add = false;
+    std::string relocated_file;
+    bool is_head = false;
+    bool is_tail = false;
+    const char* out;
+    const char* in;
+};
+
+// 定义各种你说实现的函数，在该框架下，就如平常编写一个c++程序一样，只是需要正确使用结构体参数。
+int mv(Command* com_block) {
+}
+
+int main(int argc, char* argv[]) {
+    if (argc < 2) {
+        std::cerr << "Usage: " << argv[0] << " is_back com_id option para_a para_b is_in_relocate is_out_relocate cover_or_add relocated_file is_head is_tail out in" << std::endl;
+        return 1;
+    }
+
+    Command cmd;
+
+    // Assuming the correct number of arguments (13 in this case)
+    cmd.is_back = std::stoi(argv[1]);
+    cmd.com_id = std::stoi(argv[2]);
+    cmd.option = argv[3];
+    cmd.para_a = argv[4];
+    cmd.para_b = argv[5];
+    cmd.is_in_relocate = std::stoi(argv[6]);
+    cmd.is_out_relocate = std::stoi(argv[7]);
+    cmd.cover_or_add = std::stoi(argv[8]);
+    cmd.relocated_file = argv[9];
+    cmd.is_head = std::stoi(argv[10]);
+    cmd.is_tail = std::stoi(argv[11]);
+    cmd.out = argv[12];
+    cmd.in = argv[13];
+
+   // 
+        插入实现代码
+   //
+
+    return 0;
+}

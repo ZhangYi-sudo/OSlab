@@ -1,0 +1,12 @@
+参考链接：https://blog.csdn.net/qq_32599479/article/details/80864046
+生成项目的步骤：
+touch Makefile、gedit Makefile、make（编译）、./myshell（运行exe）
+
+Makefile内容为：
+all: myshell
+
+myshell: main.cpp shell.cpp command.cpp
+	g++ main.cpp shell.cpp command.cpp -o myshell
+
+clean:
+	rm -f myshell
